@@ -404,6 +404,59 @@
   }
   .empty .ic-circ { width:72px; height:72px; border-radius:50%; background:var(--blue-02); display:flex; align-items:center; justify-content:center; color:var(--blue-07); }
 
+  /* ===== Animations ===== */
+  @keyframes scrIn {
+    from { opacity: 0; transform: translateX(18px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  .screen { animation: scrIn .28s cubic-bezier(.22,.94,.4,1); }
+  .screen[data-scr="splash"] { animation: scrInFade .4s ease-out; }
+  @keyframes scrInFade {
+    from { opacity: 0; transform: scale(.98); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .screen:not(.hide) .card,
+  .screen:not(.hide) .case-card,
+  .screen:not(.hide) .inbox-row,
+  .screen:not(.hide) .pkg-card,
+  .screen:not(.hide) .ind-tile {
+    animation: cardIn .42s cubic-bezier(.22,.94,.4,1) backwards;
+  }
+  .screen:not(.hide) .case-card:nth-child(1),
+  .screen:not(.hide) .inbox-row:nth-child(1) { animation-delay: .04s; }
+  .screen:not(.hide) .case-card:nth-child(2),
+  .screen:not(.hide) .inbox-row:nth-child(2) { animation-delay: .08s; }
+  .screen:not(.hide) .case-card:nth-child(3),
+  .screen:not(.hide) .inbox-row:nth-child(3) { animation-delay: .12s; }
+  .screen:not(.hide) .case-card:nth-child(4),
+  .screen:not(.hide) .inbox-row:nth-child(4) { animation-delay: .16s; }
+  .screen:not(.hide) .ind-tile:nth-child(2) { animation-delay: .03s; }
+  .screen:not(.hide) .ind-tile:nth-child(3) { animation-delay: .06s; }
+  .screen:not(.hide) .ind-tile:nth-child(4) { animation-delay: .09s; }
+  .screen:not(.hide) .ind-tile:nth-child(5) { animation-delay: .12s; }
+  .screen:not(.hide) .ind-tile:nth-child(6) { animation-delay: .15s; }
+  .screen:not(.hide) .ind-tile:nth-child(7) { animation-delay: .18s; }
+  .screen:not(.hide) .ind-tile:nth-child(8) { animation-delay: .21s; }
+  .screen:not(.hide) .ind-tile:nth-child(9) { animation-delay: .24s; }
+
+  @keyframes commentIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .comment-in { animation: commentIn .25s ease-out; }
+
+  @keyframes pulseRing {
+    0%   { box-shadow: 0 0 0 0 rgba(0,106,255,.4); }
+    70%  { box-shadow: 0 0 0 14px rgba(0,106,255,0); }
+    100% { box-shadow: 0 0 0 0 rgba(0,106,255,0); }
+  }
+  .pulse { animation: pulseRing 1.6s ease-out infinite; }
+
   /* Effect report ring */
   .ring-good { --p: 80; }
   .ring {
@@ -1144,7 +1197,7 @@
             </div>
           </div>
 
-          <button class="btn btn-outline btn-m" style="margin-top:14px; width:100%;">댓글 22개 더 보기</button>
+          <button id="more-comments-btn" class="btn btn-outline btn-m" style="margin-top:14px; width:100%;" onclick="loadMoreComments()">댓글 22개 더 보기</button>
         </div>
       </div>
 
@@ -1580,7 +1633,7 @@
         <div class="tf" style="margin-top:24px;">
           <span class="tf-label">광고 목적</span>
           <div class="tf-input">
-            <select style="background:transparent; border:none; outline:none; font-size:18px; font-weight:600; flex:1; color:var(--ink-9);">
+            <select onchange="showToast(this.value + ' 선택됨')" style="background:transparent; border:none; outline:none; font-size:18px; font-weight:600; flex:1; color:var(--ink-9);">
               <option>신규 손님 유치</option>
               <option>단골 재방문</option>
               <option>신메뉴 홍보</option>
@@ -2474,7 +2527,7 @@
         <div class="tf" style="margin-top:24px;">
           <span class="tf-label">광고 목적</span>
           <div class="tf-input">
-            <select style="background:transparent; border:none; outline:none; font-size:18px; font-weight:600; flex:1; color:var(--ink-9);">
+            <select onchange="showToast(this.value + ' 선택됨')" style="background:transparent; border:none; outline:none; font-size:18px; font-weight:600; flex:1; color:var(--ink-9);">
               <option>신규 손님 유치</option>
               <option>단골 재방문</option>
               <option>신메뉴 홍보</option>
@@ -2775,7 +2828,7 @@
                 <div class="t-h2" style="color:var(--ink-10); margin-top:2px;">150,000 P</div>
               </div>
             </div>
-            <button class="btn btn-neutral btn-s">사용처 ›</button>
+            <button class="btn btn-neutral btn-s" onclick="comingSoon('포인트 사용처')">사용처 <svg width="12" height="12" style="margin-left:2px;"><use href="#ic-chevron-right"/></svg></button>
           </div>
         </div>
 
@@ -2819,7 +2872,7 @@
 
         <div class="t-c1-s" style="color:var(--ink-7); margin-top:24px; margin-bottom:10px;">내 가게</div>
         <div class="card" style="padding:0; overflow:hidden;">
-          <div class="press" style="padding:16px; display:flex; align-items:center; gap:12px; border-bottom:1px solid var(--ui-02);">
+          <div class="press" onclick="comingSoon('가게 정보 편집')" style="padding:16px; display:flex; align-items:center; gap:12px; border-bottom:1px solid var(--ui-02);">
             <div style="width:36px; height:36px; border-radius:10px; background:var(--blue-02); display:flex; align-items:center; justify-content:center; color:var(--blue-08);"><svg width="18" height="18"><use href="#ic-storefront"/></svg></div>
             <div style="flex:1;">
               <div class="t-c1-s" style="color:var(--ink-10);">가게 정보</div>
@@ -2827,7 +2880,7 @@
             </div>
             <span style="color:var(--ink-6);"><svg width="14" height="14"><use href="#ic-chevron-right"/></svg></span>
           </div>
-          <div class="press" style="padding:16px; display:flex; align-items:center; gap:12px;">
+          <div class="press" onclick="comingSoon('외부 연동 관리')" style="padding:16px; display:flex; align-items:center; gap:12px;">
             <div style="width:36px; height:36px; border-radius:10px; background:var(--blue-02); display:flex; align-items:center; justify-content:center; color:var(--blue-08);"><svg width="18" height="18"><use href="#ic-link"/></svg></div>
             <div style="flex:1;">
               <div class="t-c1-s" style="color:var(--ink-10);">외부 연동</div>
@@ -2840,15 +2893,15 @@
 
         <div class="t-c1-s" style="color:var(--ink-7); margin-top:24px; margin-bottom:10px;">고객 지원</div>
         <div class="card" style="padding:0; overflow:hidden;">
-          <div class="press" style="padding:16px; display:flex; align-items:center; gap:12px; border-bottom:1px solid var(--ui-02);">
+          <div class="press" onclick="comingSoon('공지사항')" style="padding:16px; display:flex; align-items:center; gap:12px; border-bottom:1px solid var(--ui-02);">
             <div class="t-c1-s" style="color:var(--ink-10); flex:1;">공지사항</div>
             <span style="color:var(--ink-6);"><svg width="14" height="14"><use href="#ic-chevron-right"/></svg></span>
           </div>
-          <div class="press" style="padding:16px; display:flex; align-items:center; gap:12px; border-bottom:1px solid var(--ui-02);">
+          <div class="press" onclick="comingSoon('FAQ')" style="padding:16px; display:flex; align-items:center; gap:12px; border-bottom:1px solid var(--ui-02);">
             <div class="t-c1-s" style="color:var(--ink-10); flex:1;">자주 묻는 질문</div>
             <span style="color:var(--ink-6);"><svg width="14" height="14"><use href="#ic-chevron-right"/></svg></span>
           </div>
-          <div class="press" style="padding:16px; display:flex; align-items:center; gap:12px;">
+          <div class="press" onclick="comingSoon('1:1 문의')" style="padding:16px; display:flex; align-items:center; gap:12px;">
             <div class="t-c1-s" style="color:var(--ink-10); flex:1;">1:1 문의</div>
             <span style="color:var(--ink-6);"><svg width="14" height="14"><use href="#ic-chevron-right"/></svg></span>
           </div>
@@ -2959,48 +3012,54 @@
         <div class="nb-left"><button class="btn btn-ghost btn-s press" onclick="showScreen('home')"><svg width="20" height="20"><use href="#ic-chevron-left"/></svg></button></div>
         <div style="flex:1; padding: 0 4px;">
           <div style="background:var(--ui-01); border-radius:10px; padding:8px 12px; display:flex; align-items:center; gap:8px;">
-            <svg width="16" height="16" viewBox="0 0 24 24" class="ic" style="color:var(--ink-7);"><circle cx="11" cy="11" r="7"/><line x1="20" y1="20" x2="16.5" y2="16.5"/></svg>
-            <input style="flex:1; background:transparent; outline:none; border:none; font-size:14px; font-weight:500; color:var(--ink-9); padding:0;" placeholder="채널, 업종, 지역으로 검색" />
+            <svg width="16" height="16" style="color:var(--ink-7);"><use href="#ic-search"/></svg>
+            <input id="search-input" oninput="onSearchInput(event)" style="flex:1; background:transparent; outline:none; border:none; font-size:14px; font-weight:500; color:var(--ink-9); padding:0;" placeholder="채널, 업종, 지역으로 검색" />
           </div>
         </div>
-        <div class="nb-right"><button class="btn btn-ghost btn-s">취소</button></div>
+        <div class="nb-right"><button class="btn btn-ghost btn-s" onclick="document.getElementById('search-input').value=''; onSearchInput({target:document.getElementById('search-input')}); showScreen('home');">취소</button></div>
       </div>
 
       <div class="scroll" style="padding: 8px 20px 32px;">
-        <div class="t-c1-s" style="color:var(--ink-9); margin: 16px 0 10px;">최근 검색</div>
-        <div style="display:flex; flex-wrap:wrap; gap:8px;">
-          <span class="chip chip-default chip-sm">배민 우리동네</span>
-          <span class="chip chip-default chip-sm">인스타 릴스</span>
-          <span class="chip chip-default chip-sm">강남구 한식</span>
-          <span class="chip chip-default chip-sm">月 1,500만원대</span>
-        </div>
+        <!-- 검색 결과 (입력 시 노출) -->
+        <div id="search-results" class="hide"></div>
 
-        <div class="t-c1-s" style="color:var(--ink-9); margin: 28px 0 10px;">실시간 인기 검색</div>
-        <div class="card" style="padding:6px 0;">
-          <div style="padding: 10px 16px; display:flex; align-items:center; gap:10px;">
-            <span class="t-c1-s" style="color:var(--blue-08); width:18px;">1</span>
-            <span class="t-c1-m" style="color:var(--ink-9); flex:1;">배민 우리동네 광고</span>
-            <span class="chip-sm chip-tag-ok">▲ 18</span>
+        <!-- 기본 화면 (입력 없을 때) -->
+        <div id="search-default">
+          <div class="t-c1-s" style="color:var(--ink-9); margin: 16px 0 10px;">최근 검색</div>
+          <div style="display:flex; flex-wrap:wrap; gap:8px;">
+            <span class="chip chip-default chip-sm" onclick="document.getElementById('search-input').value='배민'; onSearchInput({target:document.getElementById('search-input')});">배민 우리동네</span>
+            <span class="chip chip-default chip-sm" onclick="document.getElementById('search-input').value='인스타'; onSearchInput({target:document.getElementById('search-input')});">인스타 릴스</span>
+            <span class="chip chip-default chip-sm" onclick="document.getElementById('search-input').value='한식'; onSearchInput({target:document.getElementById('search-input')});">강남구 한식</span>
+            <span class="chip chip-default chip-sm" onclick="document.getElementById('search-input').value='블로그'; onSearchInput({target:document.getElementById('search-input')});">블로그</span>
           </div>
-          <div style="padding: 10px 16px; display:flex; align-items:center; gap:10px;">
-            <span class="t-c1-s" style="color:var(--blue-08); width:18px;">2</span>
-            <span class="t-c1-m" style="color:var(--ink-9); flex:1;">인스타 릴스 인플루언서</span>
-            <span class="chip-sm chip-tag-ok">▲ 32</span>
-          </div>
-          <div style="padding: 10px 16px; display:flex; align-items:center; gap:10px;">
-            <span class="t-c1-s" style="color:var(--blue-08); width:18px;">3</span>
-            <span class="t-c1-m" style="color:var(--ink-9); flex:1;">네이버 블로그 체험단</span>
-            <span class="chip-sm chip-tag-mute">▼ 4</span>
-          </div>
-          <div style="padding: 10px 16px; display:flex; align-items:center; gap:10px;">
-            <span class="t-c1-s" style="color:var(--ink-9); width:18px;">4</span>
-            <span class="t-c1-m" style="color:var(--ink-9); flex:1;">전단지 광고</span>
-            <span class="chip-sm chip-tag-mute">- 0</span>
-          </div>
-          <div style="padding: 10px 16px; display:flex; align-items:center; gap:10px;">
-            <span class="t-c1-s" style="color:var(--ink-9); width:18px;">5</span>
-            <span class="t-c1-m" style="color:var(--ink-9); flex:1;">카카오톡 채널</span>
-            <span class="chip-sm chip-tag-ok">▲ 12</span>
+
+          <div class="t-c1-s" style="color:var(--ink-9); margin: 28px 0 10px;">실시간 인기 검색</div>
+          <div class="card" style="padding:6px 0;">
+            <div class="press" onclick="document.getElementById('search-input').value='배민'; onSearchInput({target:document.getElementById('search-input')});" style="padding: 10px 16px; display:flex; align-items:center; gap:10px;">
+              <span class="t-c1-s" style="color:var(--blue-08); width:18px;">1</span>
+              <span class="t-c1-m" style="color:var(--ink-9); flex:1;">배민 우리동네 광고</span>
+              <span class="chip-sm chip-tag-ok"><svg width="11" height="11" style="vertical-align:-1px;"><use href="#ic-trend-up"/></svg> 18</span>
+            </div>
+            <div class="press" onclick="document.getElementById('search-input').value='인스타'; onSearchInput({target:document.getElementById('search-input')});" style="padding: 10px 16px; display:flex; align-items:center; gap:10px;">
+              <span class="t-c1-s" style="color:var(--blue-08); width:18px;">2</span>
+              <span class="t-c1-m" style="color:var(--ink-9); flex:1;">인스타 릴스 인플루언서</span>
+              <span class="chip-sm chip-tag-ok"><svg width="11" height="11" style="vertical-align:-1px;"><use href="#ic-trend-up"/></svg> 32</span>
+            </div>
+            <div class="press" onclick="document.getElementById('search-input').value='블로그'; onSearchInput({target:document.getElementById('search-input')});" style="padding: 10px 16px; display:flex; align-items:center; gap:10px;">
+              <span class="t-c1-s" style="color:var(--blue-08); width:18px;">3</span>
+              <span class="t-c1-m" style="color:var(--ink-9); flex:1;">네이버 블로그 체험단</span>
+              <span class="chip-sm chip-tag-mute"><svg width="11" height="11" style="vertical-align:-1px;"><use href="#ic-trend-down"/></svg> 4</span>
+            </div>
+            <div class="press" onclick="document.getElementById('search-input').value='전단지'; onSearchInput({target:document.getElementById('search-input')});" style="padding: 10px 16px; display:flex; align-items:center; gap:10px;">
+              <span class="t-c1-s" style="color:var(--ink-9); width:18px;">4</span>
+              <span class="t-c1-m" style="color:var(--ink-9); flex:1;">전단지 광고</span>
+              <span class="chip-sm chip-tag-mute">- 0</span>
+            </div>
+            <div class="press" onclick="document.getElementById('search-input').value='카카오'; onSearchInput({target:document.getElementById('search-input')});" style="padding: 10px 16px; display:flex; align-items:center; gap:10px;">
+              <span class="t-c1-s" style="color:var(--ink-9); width:18px;">5</span>
+              <span class="t-c1-m" style="color:var(--ink-9); flex:1;">카카오톡 채널</span>
+              <span class="chip-sm chip-tag-ok"><svg width="11" height="11" style="vertical-align:-1px;"><use href="#ic-trend-up"/></svg> 12</span>
+            </div>
           </div>
         </div>
       </div>
@@ -3011,7 +3070,7 @@
       <div class="navbar">
         <div class="nb-left"><button class="btn btn-ghost btn-s press" onclick="showScreen('home')"><svg width="20" height="20"><use href="#ic-chevron-left"/></svg></button></div>
         <div class="nb-title">알림</div>
-        <div class="nb-right"><button class="btn btn-ghost btn-s">모두 읽음</button></div>
+        <div class="nb-right"><button class="btn btn-ghost btn-s" onclick="markAllRead()">모두 읽음</button></div>
       </div>
 
       <div class="scroll" style="padding: 8px 20px 32px;">
@@ -3355,6 +3414,10 @@
     const target = document.querySelector(`[data-scr="${name}"]`);
     if (target) {
       target.classList.remove('hide');
+      // restart enter animation
+      target.style.animation = 'none';
+      void target.offsetWidth;
+      target.style.animation = '';
       const scroll = target.querySelector('.scroll');
       if (scroll) scroll.scrollTop = 0;
     }
@@ -3535,6 +3598,141 @@
   function applyChannel(name) {
     showScreen('market');
     showToast(name + ' 채널 업체를 보여드려요');
+  }
+
+  // ===== Patch openSheet to init review stars hover =====
+  const _origOpenSheet = openSheet;
+  openSheet = function(id) {
+    _origOpenSheet(id);
+    if (id === 'review-write-sheet') initReviewStarsHover();
+  };
+
+  // ===== Search live filter =====
+  const _searchMock = [
+    { title: '배민 우리동네 광고 月 +312만원', sub: '강남구 한식 · 광고비 22만원 · ROI +1,318%', tags: ['배민','한식','강남','우리동네','광고','동네홍보'] },
+    { title: '인스타 릴스 5편 月 +170만원', sub: '송파구 네일샵 · 광고비 35만원 · ROI +720%', tags: ['인스타','릴스','네일','뷰티','송파','크리에이티브'] },
+    { title: '배민+쿠팡 동시 운영 月 +330만원', sub: '강서구 호프집 · 광고비 45만원 · ROI +540%', tags: ['배민','쿠팡','호프','강서','알찬'] },
+    { title: '블로그 체험단 신규 손님 +28%', sub: '마포구 카페 · 광고비 28만원 · ROI +290%', tags: ['블로그','체험단','카페','마포'] },
+    { title: '인플루언서 1인 月 +260만원', sub: '성수동 분식 · 광고비 50만원 · ROI +1,410%', tags: ['인플루언서','분식','성수','크리에이티브'] },
+    { title: '전단지+카카오 채널 月 +130만원', sub: '광명시 무인편의점 · 광고비 12만원 · ROI +380%', tags: ['전단지','카카오','편의점','무인','광명'] },
+    { title: '학원 인스타 광고 신규 등록 +12명', sub: '노원구 영어학원 · 광고비 18만원 · ROI +220%', tags: ['학원','인스타','노원','영어'] },
+    { title: '당근 광고 단골 +28% 회복', sub: '서초구 베이커리 · 광고비 25만원 · ROI +860%', tags: ['당근','베이커리','서초','단골'] },
+  ];
+  const _agencyMock = [
+    { name: '동네홍보 컴퍼니', sub: '강남구 · 사례 142건 · 평균 ROI +680%', tags: ['배민광고','전단지','개업이벤트','한식','동네'] },
+    { name: '알찬 광고 에이전시', sub: '서초구 · 사례 96건 · 평균 ROI +420%', tags: ['인스타릴스','블로그','홈페이지'] },
+    { name: '크리에이티브 랩', sub: '마포구 · 신규 · 평균 ROI +1,140%', tags: ['인스타릴스','유튜브쇼츠','인플루언서'] },
+  ];
+  function onSearchInput(e) {
+    const q = (e.target.value || '').trim().toLowerCase();
+    const def = document.getElementById('search-default');
+    const res = document.getElementById('search-results');
+    if (!q) { def.classList.remove('hide'); res.classList.add('hide'); res.innerHTML = ''; return; }
+    def.classList.add('hide');
+    res.classList.remove('hide');
+    const matchCases = _searchMock.filter(r =>
+      r.title.toLowerCase().includes(q) ||
+      r.sub.toLowerCase().includes(q) ||
+      r.tags.some(t => t.toLowerCase().includes(q))
+    );
+    const matchAgencies = _agencyMock.filter(a =>
+      a.name.toLowerCase().includes(q) || a.tags.some(t => t.toLowerCase().includes(q))
+    );
+    let html = '';
+    if (matchAgencies.length) {
+      html += '<div class="t-c1-s" style="color:var(--ink-7); margin: 8px 0 10px;">마케팅 업체 ' + matchAgencies.length + '</div>';
+      html += matchAgencies.map(a => `
+        <div class="card press" onclick="showScreen('agency-profile')" style="padding:12px 14px; margin-bottom:8px; display:flex; gap:10px; align-items:center;">
+          <div class="agency-avatar" style="width:42px; height:42px; font-size:14px; border-width:2px;">${a.name.charAt(0)}</div>
+          <div style="flex:1;">
+            <div class="t-c1-s" style="color:var(--ink-10);">${a.name}</div>
+            <div class="t-c3" style="color:var(--ink-7); margin-top:2px;">${a.sub}</div>
+          </div>
+          <svg width="14" height="14" style="color:var(--ink-6);"><use href="#ic-chevron-right"/></svg>
+        </div>
+      `).join('');
+    }
+    if (matchCases.length) {
+      html += '<div class="t-c1-s" style="color:var(--ink-7); margin: 16px 0 10px;">광고 사례 ' + matchCases.length + '</div>';
+      html += matchCases.map(c => `
+        <div class="card press" onclick="showScreen('detail')" style="padding:12px 14px; margin-bottom:8px;">
+          <div class="t-c1-s" style="color:var(--ink-10);">${c.title}</div>
+          <div class="t-c3" style="color:var(--ink-7); margin-top:2px;">${c.sub}</div>
+        </div>
+      `).join('');
+    }
+    if (!html) {
+      html = `<div class="empty">
+        <div class="ic-circ"><svg width="28" height="28"><use href="#ic-search"/></svg></div>
+        <div class="t-b3-s" style="color:var(--ink-9);">검색 결과가 없어요</div>
+        <div class="t-c3" style="color:var(--ink-7);">다른 키워드로 검색해 보세요</div>
+      </div>`;
+    }
+    res.innerHTML = html;
+  }
+
+  // ===== Load more comments =====
+  function loadMoreComments() {
+    const list = document.getElementById('detail-comments-list');
+    const more = [
+      { name: '카페', icon: 'C', msg: '저도 비슷한 광고를 진행해 봤는데 평일 점심엔 효과 좋고 주말은 보통이었어요.', time: '3일 전' },
+      { name: '편의점', icon: 'P', msg: '비슷한 매출 규모인데 ROI가 절반 정도 나왔습니다. 동네 특성 차이일까요?', time: '4일 전' },
+      { name: '뷰티', icon: 'B', msg: '한식이라 가능했던 거 같아요. 부럽네요.', time: '5일 전' },
+      { name: '베이커리', icon: 'K', msg: '저는 도우미 파견을 같이 했더니 더 좋았어요. 추천합니다!', time: '5일 전' },
+      { name: '학원', icon: '학', msg: '광고 매니저분 응대가 정말 빨랐어요. 또 의뢰할 의향 있어요.', time: '1주 전' },
+      { name: '호프', icon: '호', msg: '저녁 시간대에는 효과가 어떠셨나요? 저는 점심 위주라서요.', time: '1주 전' },
+    ];
+    list.insertAdjacentHTML('beforeend', more.map(c => `
+      <div class="comment-in" style="display:flex; gap:10px;">
+        <div class="avatar" style="width:32px; height:32px; font-size:12px; background: linear-gradient(135deg, var(--blue-04), var(--blue-07));">${c.icon}</div>
+        <div style="flex:1;">
+          <div style="display:flex; gap:6px; align-items:center;">
+            <span class="t-c1-s" style="color:var(--ink-10);">${c.name} 사장님</span>
+            <span class="chip-sm" style="background:var(--blue-02); color:var(--blue-08); padding:2px 6px;">사장</span>
+            <span class="t-c4" style="color:var(--ink-6);">${c.time}</span>
+          </div>
+          <div class="t-c1-m" style="color:var(--ink-9); margin-top:4px; line-height:1.5;">${c.msg}</div>
+          <div style="display:flex; gap:14px; margin-top:6px;">
+            <span class="t-c3" style="color:var(--ink-7);">♡ ${Math.floor(Math.random() * 30) + 1}</span>
+            <span class="t-c3" style="color:var(--ink-7);">답글</span>
+          </div>
+        </div>
+      </div>
+    `).join(''));
+    const btn = document.getElementById('more-comments-btn');
+    if (btn) btn.style.display = 'none';
+    showToast('댓글 ' + more.length + '개를 더 불러왔어요');
+  }
+
+  // ===== Mark all notifications read =====
+  function markAllRead() {
+    const notify = document.querySelector('[data-scr="notify"]');
+    if (!notify) return;
+    const dots = notify.querySelectorAll('span[style*="background:var(--danger)"]');
+    let n = 0;
+    dots.forEach(d => {
+      if (d.style.width === '6px' || d.offsetWidth <= 8) { d.style.display = 'none'; n++; }
+    });
+    showToast(n > 0 ? n + '개 알림을 읽음 처리했어요' : '읽지 않은 알림이 없어요');
+  }
+
+  // ===== Review stars hover =====
+  function initReviewStarsHover() {
+    const container = document.getElementById('review-stars');
+    if (!container) return;
+    const apply = (v) => {
+      container.querySelectorAll('[data-star]').forEach(x => {
+        x.style.transition = 'opacity .15s, transform .15s';
+        x.style.opacity = parseInt(x.dataset.star) <= v ? '1' : '0.25';
+      });
+    };
+    apply(parseInt(container.dataset.value || 5));
+    if (container.dataset.hoverInit) return;
+    container.dataset.hoverInit = '1';
+    container.querySelectorAll('[data-star]').forEach(s => {
+      s.addEventListener('mouseenter', () => apply(parseInt(s.dataset.star)));
+    });
+    container.addEventListener('mouseleave', () => apply(parseInt(container.dataset.value || 5)));
   }
 </script>
 
