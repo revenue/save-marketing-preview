@@ -721,11 +721,11 @@
 
         <!-- Sort / Filter row -->
         <div style="display:flex; gap:8px; padding: 12px 20px 16px; overflow-x:auto;" class="no-scrollbar">
-          <span class="chip chip-active">전체</span>
-          <span class="chip chip-default"><svg width="14" height="14" style="margin-right:2px;"><use href="#ic-location"/></svg> 강남구</span>
-          <span class="chip chip-default"><svg width="14" height="14" style="margin-right:2px;"><use href="#ic-money"/></svg> 광고비</span>
-          <span class="chip chip-default"><svg width="14" height="14" style="margin-right:2px;"><use href="#ic-trend-up"/></svg> ROI 순</span>
-          <span class="chip chip-default"><svg width="14" height="14" style="margin-right:2px;"><use href="#ic-clock"/></svg> 최신순</span>
+          <span class="chip chip-active" onclick="toggleChip(this, '전체')">전체</span>
+          <span class="chip chip-default" onclick="toggleChip(this, '강남구')"><svg width="14" height="14" style="margin-right:2px;"><use href="#ic-location"/></svg> 강남구</span>
+          <span class="chip chip-default" onclick="toggleChip(this, '광고비순')"><svg width="14" height="14" style="margin-right:2px;"><use href="#ic-money"/></svg> 광고비</span>
+          <span class="chip chip-default" onclick="toggleChip(this, 'ROI순')"><svg width="14" height="14" style="margin-right:2px;"><use href="#ic-trend-up"/></svg> ROI 순</span>
+          <span class="chip chip-default" onclick="toggleChip(this, '최신순')"><svg width="14" height="14" style="margin-right:2px;"><use href="#ic-clock"/></svg> 최신순</span>
         </div>
 
         <!-- Section heading -->
@@ -1101,10 +1101,17 @@
         <div style="padding: 20px;">
           <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
             <div class="t-h5" style="color:var(--ink-10);">댓글 24</div>
-            <button class="btn btn-ghost btn-s">최신순 ▾</button>
+            <button class="btn btn-ghost btn-s" onclick="comingSoon('정렬 변경')">최신순</button>
           </div>
 
-          <div style="display:flex; flex-direction:column; gap:16px;">
+          <!-- 댓글 입력 -->
+          <div style="display:flex; gap:8px; padding:10px 12px; background:var(--ui-01); border-radius:12px; margin-bottom:16px; align-items:center;">
+            <div class="avatar" style="width:30px; height:30px; font-size:11px;">나</div>
+            <input id="detail-comment-input" type="text" placeholder="댓글을 입력하세요" style="flex:1; background:transparent; border:none; outline:none; font-size:14px; color:var(--ink-9);" onkeypress="if(event.key==='Enter') submitComment('detail-comment-input','detail-comments-list')"/>
+            <button class="btn btn-primary btn-s" onclick="submitComment('detail-comment-input', 'detail-comments-list')">등록</button>
+          </div>
+
+          <div id="detail-comments-list" style="display:flex; flex-direction:column; gap:16px;">
             <div style="display:flex; gap:10px;">
               <div class="avatar" style="width:32px; height:32px; font-size:12px;">분</div>
               <div style="flex:1;">
@@ -1320,7 +1327,7 @@
 
         <!-- Action -->
         <div style="display:flex; gap:10px; margin-top:24px;">
-          <button class="btn btn-outline btn-l" style="flex:1;" onclick="showScreen('agency-profile')">업체 후기 남기기</button>
+          <button class="btn btn-outline btn-l" style="flex:1;" onclick="openSheet('review-write-sheet')">업체 후기 남기기</button>
           <button class="btn btn-primary btn-l" style="flex:1;" onclick="showScreen('agency-profile')">재의뢰</button>
         </div>
       </div>
@@ -1336,9 +1343,9 @@
       </div>
 
       <div class="tabbar">
-        <span class="tab on">받은 견적 <span style="color:var(--blue-07); margin-left:2px;">5</span></span>
-        <span class="tab">진행 중 <span style="color:var(--ink-6); margin-left:2px;">2</span></span>
-        <span class="tab">완료 <span style="color:var(--ink-6); margin-left:2px;">3</span></span>
+        <span class="tab on" onclick="toggleTab(this)">받은 견적 <span style="color:var(--blue-07); margin-left:2px;">5</span></span>
+        <span class="tab" onclick="toggleTab(this)">진행 중 <span style="color:var(--ink-6); margin-left:2px;">2</span></span>
+        <span class="tab" onclick="toggleTab(this)">완료 <span style="color:var(--ink-6); margin-left:2px;">3</span></span>
       </div>
 
       <div class="scroll" style="padding: 16px 20px 24px;">
@@ -1431,7 +1438,7 @@
         </div>
 
         <!-- Compare CTA -->
-        <button class="btn btn-outline btn-l" style="width:100%; margin-top:8px;">
+        <button class="btn btn-outline btn-l" style="width:100%; margin-top:8px;" onclick="openSheet('quote-compare-sheet')">
           <svg width="18" height="18" style="margin-right:6px;"><use href="#ic-chart"/></svg>
           5개 견적 한눈에 비교하기
         </button>
@@ -1714,10 +1721,10 @@
 
         <!-- Tabbar -->
         <div class="tabbar" style="position:sticky; top:0; z-index:3;">
-          <span class="tab on">소개</span>
-          <span class="tab">사례 142</span>
-          <span class="tab">패키지 12</span>
-          <span class="tab">후기 89</span>
+          <span class="tab on" onclick="toggleTab(this)">소개</span>
+          <span class="tab" onclick="toggleTab(this)">사례 142</span>
+          <span class="tab" onclick="toggleTab(this)">패키지 12</span>
+          <span class="tab" onclick="toggleTab(this)">후기 89</span>
         </div>
 
         <!-- 주력 채널 -->
@@ -1970,31 +1977,31 @@
               <div class="ch-logo signboard"><svg width="22" height="22"><use href="#ic-ch-signboard"/></svg></div>
               <span class="t-c3" style="color:var(--ink-9); font-weight:600;">입간판</span>
             </div>
-            <div class="press" style="display:flex; flex-direction:column; align-items:center; gap:6px;">
+            <div class="press" onclick="showScreen('agency-profile')" style="display:flex; flex-direction:column; align-items:center; gap:6px;">
               <div class="ch-logo leaflet"><svg width="22" height="22"><use href="#ic-ch-leaflet"/></svg></div>
               <span class="t-c3" style="color:var(--ink-9); font-weight:600;">전단지</span>
             </div>
-            <div class="press" style="display:flex; flex-direction:column; align-items:center; gap:6px;">
+            <div class="press" onclick="showScreen('agency-profile')" style="display:flex; flex-direction:column; align-items:center; gap:6px;">
               <div class="ch-logo event"><svg width="22" height="22"><use href="#ic-ch-event"/></svg></div>
               <span class="t-c3" style="color:var(--ink-9); font-weight:600;">개업 이벤트</span>
             </div>
-            <div class="press" style="display:flex; flex-direction:column; align-items:center; gap:6px;">
+            <div class="press" onclick="showScreen('agency-profile')" style="display:flex; flex-direction:column; align-items:center; gap:6px;">
               <div class="ch-logo helper"><svg width="22" height="22"><use href="#ic-ch-helper"/></svg></div>
               <span class="t-c3" style="color:var(--ink-9); font-weight:600;">도우미 파견</span>
             </div>
-            <div class="press" style="display:flex; flex-direction:column; align-items:center; gap:6px;">
+            <div class="press" onclick="showScreen('agency-profile')" style="display:flex; flex-direction:column; align-items:center; gap:6px;">
               <div class="ch-logo carrot"><svg width="22" height="22"><use href="#ic-ch-carrot"/></svg></div>
               <span class="t-c3" style="color:var(--ink-9); font-weight:600;">당근 광고</span>
             </div>
-            <div class="press" style="display:flex; flex-direction:column; align-items:center; gap:6px;">
+            <div class="press" onclick="showScreen('agency-profile')" style="display:flex; flex-direction:column; align-items:center; gap:6px;">
               <div class="ch-logo blog"><svg width="22" height="22"><use href="#ic-ch-blog"/></svg></div>
               <span class="t-c3" style="color:var(--ink-9); font-weight:600;">블로그 관리</span>
             </div>
-            <div class="press" style="display:flex; flex-direction:column; align-items:center; gap:6px;">
+            <div class="press" onclick="showScreen('agency-profile')" style="display:flex; flex-direction:column; align-items:center; gap:6px;">
               <div class="ch-logo website"><svg width="22" height="22"><use href="#ic-ch-website"/></svg></div>
               <span class="t-c3" style="color:var(--ink-9); font-weight:600;">홈페이지 제작</span>
             </div>
-            <div class="press" style="display:flex; flex-direction:column; align-items:center; gap:6px;">
+            <div class="press" onclick="showScreen('agency-profile')" style="display:flex; flex-direction:column; align-items:center; gap:6px;">
               <div class="ch-logo instagram"><svg width="22" height="22"><use href="#ic-ch-instagram"/></svg></div>
               <span class="t-c3" style="color:var(--ink-9); font-weight:600;">인스타 릴스</span>
             </div>
@@ -2109,7 +2116,7 @@
           <div class="t-c1-m" style="color:var(--ink-7); margin-top:2px;">한식 · 강남구 · 月 1,500~2,000만원대 매칭</div>
         </div>
         <div style="padding: 0 20px 24px; display:flex; gap:12px; overflow-x:auto;" class="no-scrollbar">
-          <div class="pkg-card press" style="min-width:240px;">
+          <div class="pkg-card press" style="min-width:240px;" onclick="openSheet('package-detail-sheet')">
             <div class="case-img feature" style="aspect-ratio: 4/3; border-radius:10px; margin-bottom:10px;">
               <div class="case-img-overlay">
                 <div></div>
@@ -2123,7 +2130,7 @@
               <span class="pill pill-green">평균 ROI +680%</span>
             </div>
           </div>
-          <div class="pkg-card press" style="min-width:240px;">
+          <div class="pkg-card press" style="min-width:240px;" onclick="openSheet('package-detail-sheet')">
             <div class="case-img alt-2" style="aspect-ratio: 4/3; border-radius:10px; margin-bottom:10px;">
               <div class="case-img-overlay">
                 <div></div>
@@ -2137,7 +2144,7 @@
               <span class="pill pill-green">평균 ROI +1,140%</span>
             </div>
           </div>
-          <div class="pkg-card press" style="min-width:240px;">
+          <div class="pkg-card press" style="min-width:240px;" onclick="openSheet('package-detail-sheet')">
             <div class="case-img alt-4" style="aspect-ratio: 4/3; border-radius:10px; margin-bottom:10px;">
               <div class="case-img-overlay">
                 <div></div>
@@ -2186,56 +2193,56 @@
 
         <!-- Tab -->
         <div class="tabbar">
-          <span class="tab on">업종</span>
-          <span class="tab">광고 채널</span>
-          <span class="tab">지역</span>
-          <span class="tab">예산</span>
+          <span class="tab on" onclick="toggleTab(this)">업종</span>
+          <span class="tab" onclick="toggleTab(this)">광고 채널</span>
+          <span class="tab" onclick="toggleTab(this)">지역</span>
+          <span class="tab" onclick="toggleTab(this)">예산</span>
         </div>
 
         <!-- Industry grid -->
         <div style="padding: 16px 20px 24px;">
           <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:10px;">
-            <div class="ind-tile press" style="background: linear-gradient(135deg,#FFD9B7,#FF8AAE);" onclick="showScreen('home')">
+            <div class="ind-tile press" onclick="showScreen('home')" style="background: linear-gradient(135deg,#FFD9B7,#FF8AAE);" onclick="showScreen('home')">
               <span class="ic-wrap"><svg width="32" height="32"><use href="#ic-ind-restaurant"/></svg></span>
               <span class="lbl">한식</span>
               <span class="cnt">324건</span>
             </div>
-            <div class="ind-tile press" style="background: linear-gradient(135deg,#C9F6E0,#338CFF);">
+            <div class="ind-tile press" onclick="showScreen('home')" style="background: linear-gradient(135deg,#C9F6E0,#338CFF);">
               <span class="ic-wrap"><svg width="32" height="32"><use href="#ic-ind-noodle"/></svg></span>
               <span class="lbl">분식</span>
               <span class="cnt">186건</span>
             </div>
-            <div class="ind-tile press" style="background: linear-gradient(135deg,#FCE38A,#FF7E5F);">
+            <div class="ind-tile press" onclick="showScreen('home')" style="background: linear-gradient(135deg,#FCE38A,#FF7E5F);">
               <span class="ic-wrap"><svg width="32" height="32"><use href="#ic-ind-cafe"/></svg></span>
               <span class="lbl">카페</span>
               <span class="cnt">218건</span>
             </div>
-            <div class="ind-tile press" style="background: linear-gradient(135deg,#654ea3,#eaafc8);">
+            <div class="ind-tile press" onclick="showScreen('home')" style="background: linear-gradient(135deg,#654ea3,#eaafc8);">
               <span class="ic-wrap"><svg width="32" height="32"><use href="#ic-ind-beauty"/></svg></span>
               <span class="lbl">네일/뷰티</span>
               <span class="cnt">142건</span>
             </div>
-            <div class="ind-tile press" style="background: linear-gradient(135deg,#1A2980,#26D0CE);">
+            <div class="ind-tile press" onclick="showScreen('home')" style="background: linear-gradient(135deg,#1A2980,#26D0CE);">
               <span class="ic-wrap"><svg width="32" height="32"><use href="#ic-ind-store"/></svg></span>
               <span class="lbl">편의점/소매</span>
               <span class="cnt">98건</span>
             </div>
-            <div class="ind-tile press" style="background: linear-gradient(135deg,#F76B1C,#FAD961);">
+            <div class="ind-tile press" onclick="showScreen('home')" style="background: linear-gradient(135deg,#F76B1C,#FAD961);">
               <span class="ic-wrap"><svg width="32" height="32"><use href="#ic-ind-pub"/></svg></span>
               <span class="lbl">호프/주점</span>
               <span class="cnt">76건</span>
             </div>
-            <div class="ind-tile press" style="background: linear-gradient(135deg,#B24592,#F15F79);">
+            <div class="ind-tile press" onclick="showScreen('home')" style="background: linear-gradient(135deg,#B24592,#F15F79);">
               <span class="ic-wrap"><svg width="32" height="32"><use href="#ic-ind-edu"/></svg></span>
               <span class="lbl">학원/교육</span>
               <span class="cnt">64건</span>
             </div>
-            <div class="ind-tile press" style="background: linear-gradient(135deg,#2E3192,#1BFFFF);">
+            <div class="ind-tile press" onclick="showScreen('home')" style="background: linear-gradient(135deg,#2E3192,#1BFFFF);">
               <span class="ic-wrap"><svg width="32" height="32"><use href="#ic-ind-pet"/></svg></span>
               <span class="lbl">반려/애견</span>
               <span class="cnt">42건</span>
             </div>
-            <div class="ind-tile press" style="background: linear-gradient(135deg,#a8c0ff,#3f2b96);">
+            <div class="ind-tile press" onclick="showScreen('home')" style="background: linear-gradient(135deg,#a8c0ff,#3f2b96);">
               <span class="ic-wrap"><svg width="32" height="32"><use href="#ic-ind-ecommerce"/></svg></span>
               <span class="lbl">스마트스토어</span>
               <span class="cnt">38건</span>
@@ -2620,9 +2627,9 @@
 
       <!-- Tab -->
       <div class="tabbar">
-        <span class="tab on">전체 7</span>
-        <span class="tab">한식 3</span>
-        <span class="tab">광고 채널 2</span>
+        <span class="tab on" onclick="toggleTab(this)">전체 7</span>
+        <span class="tab" onclick="toggleTab(this)">한식 3</span>
+        <span class="tab" onclick="toggleTab(this)">광고 채널 2</span>
       </div>
 
       <div class="scroll" style="padding: 16px 20px 24px;">
@@ -3010,7 +3017,7 @@
       <div class="scroll" style="padding: 8px 20px 32px;">
         <div class="t-c1-s" style="color:var(--ink-7); margin: 16px 0 10px;">오늘</div>
         <div class="card" style="padding:0; overflow:hidden;">
-          <div class="press" style="padding:14px 16px; display:flex; gap:12px; border-bottom:1px solid var(--ui-02);">
+          <div class="press" onclick="showScreen('inbox')" style="padding:14px 16px; display:flex; gap:12px; border-bottom:1px solid var(--ui-02);">
             <div style="width:40px; height:40px; border-radius:12px; background:var(--blue-02); display:flex; align-items:center; justify-content:center; color:var(--blue-08);"><svg width="20" height="20"><use href="#ic-handshake"/></svg></div>
             <div style="flex:1;">
               <div class="t-c1-s" style="color:var(--ink-10);">새로운 견적 3건이 도착했어요</div>
@@ -3019,7 +3026,7 @@
             </div>
             <span style="width:6px; height:6px; border-radius:50%; background:var(--danger); margin-top:6px;"></span>
           </div>
-          <div class="press" style="padding:14px 16px; display:flex; gap:12px;">
+          <div class="press" onclick="showScreen('agency-profile')" style="padding:14px 16px; display:flex; gap:12px;">
             <div style="width:40px; height:40px; border-radius:12px; background:var(--blue-02); display:flex; align-items:center; justify-content:center; color:var(--blue-08);"><svg width="20" height="20"><use href="#ic-chat"/></svg></div>
             <div style="flex:1;">
               <div class="t-c1-s" style="color:var(--ink-10);">동네홍보 컴퍼니가 메시지를 보냈어요</div>
@@ -3039,7 +3046,7 @@
               <div class="t-c4" style="color:var(--ink-6); margin-top:6px;">3일 전</div>
             </div>
           </div>
-          <div class="press" style="padding:14px 16px; display:flex; gap:12px; border-bottom:1px solid var(--ui-02);">
+          <div class="press" onclick="showScreen('profile')" style="padding:14px 16px; display:flex; gap:12px; border-bottom:1px solid var(--ui-02);">
             <div style="width:40px; height:40px; border-radius:12px; background:#FFF8E5; display:flex; align-items:center; justify-content:center; color:#C97100;"><svg width="20" height="20"><use href="#ic-gift"/></svg></div>
             <div style="flex:1;">
               <div class="t-c1-s" style="color:var(--ink-10);">보상 50,000P가 적립됐어요</div>
@@ -3047,7 +3054,7 @@
               <div class="t-c4" style="color:var(--ink-6); margin-top:6px;">5일 전</div>
             </div>
           </div>
-          <div class="press" style="padding:14px 16px; display:flex; gap:12px;">
+          <div class="press" onclick="showScreen('market')" style="padding:14px 16px; display:flex; gap:12px;">
             <div style="width:40px; height:40px; border-radius:12px; background:var(--blue-02); display:flex; align-items:center; justify-content:center; color:var(--blue-08);"><svg width="20" height="20"><use href="#ic-storefront"/></svg></div>
             <div style="flex:1;">
               <div class="t-c1-s" style="color:var(--ink-10);">우리 동네에 신규 업체 2곳이 입점했어요</div>
@@ -3154,6 +3161,185 @@
       </div>
     </div>
 
+    <!-- Quote Compare Sheet -->
+    <div class="sheet" id="quote-compare-sheet">
+      <div class="sheet-handle"></div>
+      <div class="sheet-header"><div class="sheet-header-title">5개 견적 비교</div></div>
+      <div class="sheet-body" style="padding-bottom:32px;">
+        <div class="t-c1-m" style="color:var(--ink-7); margin-bottom:14px;">평점·견적가·평균 ROI를 한눈에 비교해 보세요.</div>
+
+        <!-- Header row -->
+        <div style="display:grid; grid-template-columns: 1.6fr 0.8fr 0.8fr 0.8fr; gap:6px; padding:8px 4px; border-bottom:1px solid var(--ui-02);">
+          <div class="t-c4" style="color:var(--ink-7); font-weight:700;">업체</div>
+          <div class="t-c4" style="color:var(--ink-7); font-weight:700; text-align:center;">견적</div>
+          <div class="t-c4" style="color:var(--ink-7); font-weight:700; text-align:center;">평점</div>
+          <div class="t-c4" style="color:var(--ink-7); font-weight:700; text-align:right;">ROI</div>
+        </div>
+
+        <!-- Rows -->
+        <div style="display:flex; flex-direction:column; gap:0;">
+          <div onclick="acceptQuote('동네홍보 컴퍼니')" class="press" style="display:grid; grid-template-columns: 1.6fr 0.8fr 0.8fr 0.8fr; gap:6px; padding:12px 4px; border-bottom:1px solid var(--ui-02); align-items:center; cursor:pointer; background: var(--blue-02);">
+            <div>
+              <div class="t-c1-s" style="color:var(--ink-10);">동네홍보 컴퍼니</div>
+              <div class="t-c4" style="color:var(--ink-7);">강남구</div>
+            </div>
+            <div class="t-c1-s" style="text-align:center; color:var(--ink-10);">38만원</div>
+            <div class="t-c1-m" style="text-align:center; color:var(--ink-10);">4.8</div>
+            <div class="t-c1-s ef-positive" style="text-align:right;">+680%</div>
+          </div>
+          <div onclick="acceptQuote('알찬 광고 에이전시')" class="press" style="display:grid; grid-template-columns: 1.6fr 0.8fr 0.8fr 0.8fr; gap:6px; padding:12px 4px; border-bottom:1px solid var(--ui-02); align-items:center; cursor:pointer;">
+            <div>
+              <div class="t-c1-s" style="color:var(--ink-10);">알찬 광고 에이전시</div>
+              <div class="t-c4" style="color:var(--ink-7);">서초구</div>
+            </div>
+            <div class="t-c1-s" style="text-align:center; color:var(--ink-10);">42만원</div>
+            <div class="t-c1-m" style="text-align:center; color:var(--ink-10);">4.6</div>
+            <div class="t-c1-s ef-positive" style="text-align:right;">+420%</div>
+          </div>
+          <div onclick="acceptQuote('크리에이티브 랩')" class="press" style="display:grid; grid-template-columns: 1.6fr 0.8fr 0.8fr 0.8fr; gap:6px; padding:12px 4px; border-bottom:1px solid var(--ui-02); align-items:center; cursor:pointer;">
+            <div>
+              <div class="t-c1-s" style="color:var(--ink-10);">크리에이티브 랩</div>
+              <div class="t-c4" style="color:var(--ink-7);">마포구 · 신규</div>
+            </div>
+            <div class="t-c1-s" style="text-align:center; color:var(--ink-10);">45만원</div>
+            <div class="t-c1-m" style="text-align:center; color:var(--ink-10);">4.9</div>
+            <div class="t-c1-s ef-positive" style="text-align:right;">+1,140%</div>
+          </div>
+          <div onclick="acceptQuote('스마트 마케팅')" class="press" style="display:grid; grid-template-columns: 1.6fr 0.8fr 0.8fr 0.8fr; gap:6px; padding:12px 4px; border-bottom:1px solid var(--ui-02); align-items:center; cursor:pointer;">
+            <div>
+              <div class="t-c1-s" style="color:var(--ink-10);">스마트 마케팅</div>
+              <div class="t-c4" style="color:var(--ink-7);">송파구</div>
+            </div>
+            <div class="t-c1-s" style="text-align:center; color:var(--ink-10);">52만원</div>
+            <div class="t-c1-m" style="text-align:center; color:var(--ink-10);">4.5</div>
+            <div class="t-c1-s ef-positive" style="text-align:right;">+360%</div>
+          </div>
+          <div onclick="acceptQuote('빅 애드')" class="press" style="display:grid; grid-template-columns: 1.6fr 0.8fr 0.8fr 0.8fr; gap:6px; padding:12px 4px; align-items:center; cursor:pointer;">
+            <div>
+              <div class="t-c1-s" style="color:var(--ink-10);">빅 애드</div>
+              <div class="t-c4" style="color:var(--ink-7);">강동구</div>
+            </div>
+            <div class="t-c1-s" style="text-align:center; color:var(--ink-10);">68만원</div>
+            <div class="t-c1-m" style="text-align:center; color:var(--ink-10);">4.3</div>
+            <div class="t-c1-s ef-positive" style="text-align:right;">+240%</div>
+          </div>
+        </div>
+
+        <div class="card-flat" style="margin-top:16px; padding:10px 12px; background: var(--blue-02); border-color:var(--blue-04);">
+          <div style="display:flex; gap:8px; align-items:flex-start;">
+            <svg width="16" height="16" style="color:var(--blue-08); margin-top:2px;"><use href="#ic-info"/></svg>
+            <div class="t-c3" style="color:var(--blue-08); line-height:1.5;">
+              가장 저렴한 견적이 항상 정답은 아니에요. 평균 ROI와 평점을 함께 살펴보세요. SAVE 검증 평균 ROI는 가짜 후기가 아닌 실제 매출 데이터로 계산된 수치입니다.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Review Write Sheet -->
+    <div class="sheet" id="review-write-sheet">
+      <div class="sheet-handle"></div>
+      <div class="sheet-header"><div class="sheet-header-title">후기 남기기</div></div>
+      <div class="sheet-body" style="padding-bottom:32px;">
+        <div style="display:flex; gap:10px; align-items:center; margin-bottom:14px;">
+          <div class="agency-avatar" style="width:40px; height:40px; font-size:14px; border-width:2px;">동</div>
+          <div>
+            <div class="t-c1-s" style="color:var(--ink-10);">동네홍보 컴퍼니</div>
+            <div class="t-c3" style="color:var(--ink-7);">배민 광고 + 도우미 · 4주</div>
+          </div>
+        </div>
+
+        <div class="t-c1-s" style="color:var(--ink-10); margin-bottom:8px;">별점</div>
+        <div id="review-stars" data-value="5" style="display:flex; gap:6px; margin-bottom:16px;">
+          <span data-star="1" onclick="selectStar(this.parentElement, 1)" style="color:#F5A623; cursor:pointer;"><svg width="32" height="32"><use href="#ic-star"/></svg></span>
+          <span data-star="2" onclick="selectStar(this.parentElement, 2)" style="color:#F5A623; cursor:pointer;"><svg width="32" height="32"><use href="#ic-star"/></svg></span>
+          <span data-star="3" onclick="selectStar(this.parentElement, 3)" style="color:#F5A623; cursor:pointer;"><svg width="32" height="32"><use href="#ic-star"/></svg></span>
+          <span data-star="4" onclick="selectStar(this.parentElement, 4)" style="color:#F5A623; cursor:pointer;"><svg width="32" height="32"><use href="#ic-star"/></svg></span>
+          <span data-star="5" onclick="selectStar(this.parentElement, 5)" style="color:#F5A623; cursor:pointer;"><svg width="32" height="32"><use href="#ic-star"/></svg></span>
+        </div>
+
+        <div class="tf">
+          <span class="tf-label">후기 (선택)</span>
+          <div class="tf-input"><textarea id="review-text" rows="3" placeholder="다른 사장님께 도움이 될 만한 한 마디"></textarea></div>
+        </div>
+
+        <div class="card-flat" style="margin-top:14px; padding:10px 12px; background:#E5F6EC; border-color:#B7E4C7;">
+          <div style="display:flex; gap:8px; align-items:flex-start;">
+            <svg width="16" height="16" style="color:#108B51; margin-top:2px;"><use href="#ic-shield-check"/></svg>
+            <div class="t-c3" style="color:#108B51; line-height:1.5;">
+              SAVE 자동 검증 ROI(+1,318%)도 후기에 함께 표시돼요.
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:10px; margin-top:20px;">
+          <button class="btn btn-outline btn-l" style="flex:1;" onclick="closeSheet()">취소</button>
+          <button class="btn btn-primary btn-l" style="flex:2;" onclick="closeSheet(); showToast('후기가 등록됐어요');">후기 등록</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Package Detail Sheet -->
+    <div class="sheet" id="package-detail-sheet">
+      <div class="sheet-handle"></div>
+      <div class="sheet-header"><div class="sheet-header-title">패키지 상세</div></div>
+      <div class="sheet-body" style="padding-bottom:32px;">
+        <div class="case-img feature" style="aspect-ratio: 4/3; border-radius:14px; margin-bottom:14px;">
+          <div class="case-img-overlay">
+            <span class="verified-badge"><svg width="12" height="12"><use href="#ic-verified"/></svg> SAVE 인증</span>
+            <div>
+              <div class="t-h4" style="color:#fff;">배민 우리동네 광고 시작 패키지</div>
+              <div class="t-c1-m" style="color:rgba(255,255,255,.85); margin-top:4px;">동네홍보 컴퍼니</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="effect-block" style="margin-bottom:14px;">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+            <div>
+              <div class="t-c1-m" style="color:var(--blue-08);">평균 매출 변화</div>
+              <div class="t-h2 ef-positive">+ 280만원 / 4주</div>
+            </div>
+            <div class="roi-pill up">ROI +680%</div>
+          </div>
+          <div class="t-c3" style="color:var(--ink-7); margin-top:8px;">강남구 한식 사장님 84명 평균 (SAVE 검증)</div>
+        </div>
+
+        <div class="t-c1-s" style="color:var(--ink-10); margin-bottom:8px;">패키지 구성</div>
+        <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:14px;">
+          <div style="display:flex; gap:10px; align-items:flex-start;">
+            <svg width="18" height="18" style="color:var(--success); margin-top:2px;"><use href="#ic-check"/></svg>
+            <div class="t-c1-m" style="color:var(--ink-9);">배민 우리동네 광고 4주 운영 (반경 1.5km)</div>
+          </div>
+          <div style="display:flex; gap:10px; align-items:flex-start;">
+            <svg width="18" height="18" style="color:var(--success); margin-top:2px;"><use href="#ic-check"/></svg>
+            <div class="t-c1-m" style="color:var(--ink-9);">광고 소재 시안 2종 제공</div>
+          </div>
+          <div style="display:flex; gap:10px; align-items:flex-start;">
+            <svg width="18" height="18" style="color:var(--success); margin-top:2px;"><use href="#ic-check"/></svg>
+            <div class="t-c1-m" style="color:var(--ink-9);">주 1회 효과 리포트 (SAVE 자동 분석)</div>
+          </div>
+          <div style="display:flex; gap:10px; align-items:flex-start;">
+            <svg width="18" height="18" style="color:var(--success); margin-top:2px;"><use href="#ic-check"/></svg>
+            <div class="t-c1-m" style="color:var(--ink-9);">중간 점검 미팅 1회</div>
+          </div>
+        </div>
+
+        <div class="card-flat" style="padding:12px 14px; display:flex; align-items:center; justify-content:space-between;">
+          <div>
+            <div class="t-c3" style="color:var(--ink-7);">패키지 가격</div>
+            <div class="t-h4" style="color:var(--ink-10);">22만원</div>
+          </div>
+          <span class="pill pill-yellow">광고비 별도</span>
+        </div>
+
+        <div style="display:flex; gap:10px; margin-top:20px;">
+          <button class="btn btn-outline btn-l" style="flex:1;" onclick="closeSheet(); showScreen('agency-profile');">업체 보기</button>
+          <button class="btn btn-primary btn-l" style="flex:2;" onclick="closeSheet(); showScreen('request1');">견적 요청</button>
+        </div>
+      </div>
+    </div>
+
     <!-- Toast -->
     <div class="toast" id="toast">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>
@@ -3240,6 +3426,115 @@
     t.classList.add('show');
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => t.classList.remove('show'), 1800);
+  }
+
+  // ===== Interactive helpers =====
+
+  // Toggle filter chip within its sibling group
+  function toggleChip(el, label) {
+    const parent = el.parentElement;
+    parent.querySelectorAll('.chip').forEach(c => {
+      c.classList.remove('chip-active');
+      c.classList.add('chip-default');
+    });
+    el.classList.remove('chip-default');
+    el.classList.add('chip-active');
+    if (label) showToast(label + ' 필터 적용');
+  }
+
+  // Toggle tab in tabbar
+  function toggleTab(el) {
+    const parent = el.parentElement;
+    parent.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
+    el.classList.add('on');
+  }
+
+  // Toggle a like button (heart) with count
+  function toggleLike(el) {
+    const cnt = el.querySelector('[data-cnt]');
+    let n = cnt ? parseInt(cnt.textContent) : 0;
+    if (el.dataset.on === '1') {
+      el.dataset.on = '0';
+      const svg = el.querySelector('svg use');
+      if (svg) svg.setAttribute('href', '#ic-heart');
+      el.style.color = 'var(--ink-7)';
+      if (cnt) cnt.textContent = String(n - 1);
+    } else {
+      el.dataset.on = '1';
+      const svg = el.querySelector('svg use');
+      if (svg) svg.setAttribute('href', '#ic-heart');
+      const sv = el.querySelector('svg');
+      if (sv) sv.setAttribute('fill', 'currentColor');
+      el.style.color = 'var(--danger)';
+      if (cnt) cnt.textContent = String(n + 1);
+      showToast('좋아요!');
+    }
+  }
+
+  // Toggle a setting toggle and show toast
+  function toggleSetting(el, label) {
+    el.classList.toggle('on');
+    if (label) showToast(label + ' ' + (el.classList.contains('on') ? '켬' : '끔'));
+  }
+
+  // Submit a new comment to a list
+  function submitComment(inputId, listId) {
+    const input = document.getElementById(inputId);
+    if (!input || !input.value.trim()) { showToast('내용을 입력해 주세요'); return; }
+    const list = document.getElementById(listId);
+    const text = input.value.replace(/[<>]/g, '');
+    const html = `
+      <div style="display:flex; gap:10px;">
+        <div class="avatar" style="width:32px; height:32px; font-size:12px;">나</div>
+        <div style="flex:1;">
+          <div style="display:flex; gap:6px; align-items:center;">
+            <span class="t-c1-s" style="color:var(--ink-10);">한식 사장님</span>
+            <span class="chip-sm" style="background:var(--blue-02); color:var(--blue-08); padding:2px 6px;">나</span>
+            <span class="t-c4" style="color:var(--ink-6);">방금</span>
+          </div>
+          <div class="t-c1-m" style="color:var(--ink-9); margin-top:4px; line-height:1.5;">${text}</div>
+          <div style="display:flex; gap:14px; margin-top:6px;">
+            <span class="t-c3" style="color:var(--ink-7);">♡ 0</span>
+            <span class="t-c3" style="color:var(--ink-7);">답글</span>
+          </div>
+        </div>
+      </div>`;
+    list.insertAdjacentHTML('beforeend', html);
+    input.value = '';
+    showToast('댓글이 등록됐어요');
+  }
+
+  // Accept a quote (mock)
+  function acceptQuote(name) {
+    closeSheet();
+    showToast(name + '에게 채택 의사를 전달했어요');
+    setTimeout(() => showScreen('inbox'), 600);
+  }
+
+  // Star rating selector
+  function selectStar(container, value) {
+    container.querySelectorAll('[data-star]').forEach(s => {
+      const idx = parseInt(s.dataset.star);
+      s.style.opacity = idx <= value ? '1' : '0.25';
+    });
+    container.dataset.value = value;
+  }
+
+  // "Coming soon" generic
+  function comingSoon(label) {
+    showToast((label || '준비 중') + '이에요');
+  }
+
+  // Apply category filter (from discover or chip)
+  function applyCategory(name) {
+    showScreen('home');
+    showToast(name + ' 사례를 보여드려요');
+  }
+
+  // Apply channel filter (from market)
+  function applyChannel(name) {
+    showScreen('market');
+    showToast(name + ' 채널 업체를 보여드려요');
   }
 </script>
 
