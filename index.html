@@ -197,21 +197,28 @@
   .bar>span { display:block; height:100%; background:var(--blue-07); border-radius:99px; }
   .bar-success>span { background:var(--success); }
 
-  /* Inside-Stores specific (sample photos via picsum.photos) */
+  /* Inside-Stores specific (real Unsplash photos — no text, marketing-grade) */
   .case-img {
     width:100%; aspect-ratio: 4/5; border-radius:14px; position:relative; overflow:hidden;
-    background: #1A2980 url('https://picsum.photos/seed/savemkt-default/600/750') center/cover;
+    background: #1A2980 url('https://images.unsplash.com/photo-1583224964978-2257b960c3d3?w=600&q=80&fit=crop&auto=format') center/cover;
   }
-  .case-img.alt-1 { background: #C9F6E0 url('https://picsum.photos/seed/savemkt-cafe/600/750') center/cover; }
-  .case-img.alt-2 { background: #FCE38A url('https://picsum.photos/seed/savemkt-nail/600/750') center/cover; }
-  .case-img.alt-3 { background: #1A2980 url('https://picsum.photos/seed/savemkt-conv/600/750') center/cover; }
-  .case-img.alt-4 { background: #F76B1C url('https://picsum.photos/seed/savemkt-pub/600/750') center/cover; }
-  .case-img.alt-5 { background: #654ea3 url('https://picsum.photos/seed/savemkt-store/600/750') center/cover; }
-  .case-img.alt-6 { background: #2E3192 url('https://picsum.photos/seed/savemkt-edu/600/750') center/cover; }
-  .case-img.alt-7 { background: #B24592 url('https://picsum.photos/seed/savemkt-bunsik/600/750') center/cover; }
+  /* alt-1: cafe / latte art */
+  .case-img.alt-1 { background: #C9F6E0 url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80&fit=crop&auto=format') center/cover; }
+  /* alt-2: nail / beauty */
+  .case-img.alt-2 { background: #FCE38A url('https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&q=80&fit=crop&auto=format') center/cover; }
+  /* alt-3: convenience / storefront */
+  .case-img.alt-3 { background: #1A2980 url('https://images.unsplash.com/photo-1601599963565-b7e8a35afa17?w=600&q=80&fit=crop&auto=format') center/cover; }
+  /* alt-4: pub / beer */
+  .case-img.alt-4 { background: #F76B1C url('https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=600&q=80&fit=crop&auto=format') center/cover; }
+  /* alt-5: shop facade */
+  .case-img.alt-5 { background: #654ea3 url('https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600&q=80&fit=crop&auto=format') center/cover; }
+  /* alt-6: study / education */
+  .case-img.alt-6 { background: #2E3192 url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=600&q=80&fit=crop&auto=format') center/cover; }
+  /* alt-7: korean street food / bunsik */
+  .case-img.alt-7 { background: #B24592 url('https://images.unsplash.com/photo-1635352608595-0a0d3dc2b2e0?w=600&q=80&fit=crop&auto=format') center/cover; }
   .case-img.feature {
     aspect-ratio: 16/14;
-    background: #1A2980 url('https://picsum.photos/seed/savemkt-hero-hansik/800/700') center/cover;
+    background: #1A2980 url('https://images.unsplash.com/photo-1583032937-6128fafad5dd?w=800&q=85&fit=crop&auto=format') center/cover;
   }
   .case-img::before {
     content:""; position:absolute; inset:0;
@@ -359,13 +366,13 @@
   .star-rating { display:inline-flex; align-items:center; gap:3px; color:#F5A623; font-size:13px; font-weight:700; }
   .star-rating svg { width:13px; height:13px; }
 
-  /* Agency hero (sample photos) */
+  /* Agency hero (Unsplash — marketing studios / teams, no text) */
   .agency-hero {
     height: 200px; position:relative; overflow:hidden;
-    background: #1A2980 url('https://picsum.photos/seed/savemkt-agency/800/400') center/cover;
+    background: #1A2980 url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=80&fit=crop&auto=format') center/cover;
   }
-  .agency-hero.tone-2 { background: #654ea3 url('https://picsum.photos/seed/savemkt-agency-2/800/400') center/cover; }
-  .agency-hero.tone-3 { background: #F76B1C url('https://picsum.photos/seed/savemkt-agency-3/800/400') center/cover; }
+  .agency-hero.tone-2 { background: #654ea3 url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&q=80&fit=crop&auto=format') center/cover; }
+  .agency-hero.tone-3 { background: #F76B1C url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80&fit=crop&auto=format') center/cover; }
   .agency-hero::after {
     content:""; position:absolute; inset:0;
     background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,.55) 100%);
@@ -1808,22 +1815,22 @@
           <div class="t-c1-s" style="color:var(--ink-10); margin-bottom:12px;">함께하는 사람들</div>
           <div style="display:flex; gap:14px; overflow-x:auto;" class="no-scrollbar">
             <div style="flex-shrink:0; width:90px; text-align:center;">
-              <div class="avatar lg" style="margin: 0 auto 8px; background: url('https://i.pravatar.cc/128?img=12') center/cover; color: transparent;"></div>
+              <div class="avatar lg" style="margin: 0 auto 8px; background: url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&q=80&fit=crop&auto=format&face=center') center/cover; color: transparent;"></div>
               <div class="t-c3" style="color:var(--ink-10); font-weight:700;">김민수 대표</div>
               <div class="t-c4" style="color:var(--ink-7); margin-top:2px;">광고기획 12년</div>
             </div>
             <div style="flex-shrink:0; width:90px; text-align:center;">
-              <div class="avatar lg" style="margin: 0 auto 8px; background: url('https://i.pravatar.cc/128?img=5') center/cover; color: transparent;"></div>
+              <div class="avatar lg" style="margin: 0 auto 8px; background: url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80&fit=crop&auto=format&face=center') center/cover; color: transparent;"></div>
               <div class="t-c3" style="color:var(--ink-10); font-weight:700;">박지영</div>
               <div class="t-c4" style="color:var(--ink-7); margin-top:2px;">디자인 리드</div>
             </div>
             <div style="flex-shrink:0; width:90px; text-align:center;">
-              <div class="avatar lg" style="margin: 0 auto 8px; background: url('https://i.pravatar.cc/128?img=33') center/cover; color: transparent;"></div>
+              <div class="avatar lg" style="margin: 0 auto 8px; background: url('https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=200&q=80&fit=crop&auto=format&face=center') center/cover; color: transparent;"></div>
               <div class="t-c3" style="color:var(--ink-10); font-weight:700;">이준호</div>
               <div class="t-c4" style="color:var(--ink-7); margin-top:2px;">퍼포먼스 매니저</div>
             </div>
             <div style="flex-shrink:0; width:90px; text-align:center;">
-              <div class="avatar lg" style="margin: 0 auto 8px; background: url('https://i.pravatar.cc/128?img=20') center/cover; color: transparent;"></div>
+              <div class="avatar lg" style="margin: 0 auto 8px; background: url('https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=200&q=80&fit=crop&auto=format&face=center') center/cover; color: transparent;"></div>
               <div class="t-c3" style="color:var(--ink-10); font-weight:700;">최서연</div>
               <div class="t-c4" style="color:var(--ink-7); margin-top:2px;">고객 매니저</div>
             </div>
@@ -2789,7 +2796,7 @@
       <div class="scroll" style="padding: 12px 20px 32px;">
         <!-- Profile head -->
         <div style="display:flex; align-items:center; gap:14px; padding: 8px 0 16px;">
-          <div class="avatar lg" style="background: url('https://i.pravatar.cc/128?img=15') center/cover; color: transparent;"></div>
+          <div class="avatar lg" style="background: url('https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&q=80&fit=crop&auto=format&face=center') center/cover; color: transparent;"></div>
           <div style="flex:1;">
             <div class="t-h4" style="color:var(--ink-10);">한식 사장님</div>
             <div class="t-c1-m" style="color:var(--ink-7); margin-top:2px;">강남구 · 月 1,500~2,000만원대</div>
