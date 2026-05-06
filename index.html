@@ -30,9 +30,9 @@
         fontFamily: { sans: ['"Pretendard Variable"', 'Pretendard', 'system-ui', 'sans-serif'] },
         borderRadius: { 'sds-8':'8px', 'sds-12':'12px', 'sds-16':'16px', 'sds-20':'20px' },
         boxShadow: {
-          card: '0 0 0 1px #E5E9F2',
-          lift: '0 10px 24px -10px rgba(19,22,25,.15), 0 0 0 1px #E5E9F2',
-          hero: '0 16px 32px -12px rgba(0,106,255,.35)',
+          card: '0 1px 3px rgba(0,0,0,.05)',
+          lift: '0 4px 12px -4px rgba(0,0,0,.08)',
+          hero: '0 8px 20px -8px rgba(22,119,255,.25)',
         },
       }
     }
@@ -127,12 +127,12 @@
   .chip-active { background:var(--ink-9); color:#fff; }
   .chip-default { background:#fff; color:var(--ink-7); border:1px solid var(--ui-03); }
   .chip-sm { height:26px; padding:0 10px; border-radius:8px; font-size:12px; font-weight:600; }
-  .chip-tag-info   { background:var(--blue-02); color:var(--blue-08); }
-  .chip-tag-warn   { background:#FFF4E0; color:#C97100; }
-  .chip-tag-ok     { background:#E5F6EC; color:#108B51; }
-  .chip-tag-danger { background:#FCE5E5; color:var(--danger); }
-  .chip-tag-mute   { background:var(--ui-02); color:var(--ink-7); }
-  .chip-verified   { background:#E0FBF6; color:#008A77; border:1px solid #B7F1E6; }
+  .chip-tag-info   { background:var(--blue-02); color:var(--blue-07); }
+  .chip-tag-warn   { background:var(--ui-01); color:var(--ink-7); }
+  .chip-tag-ok     { background:var(--blue-02); color:var(--blue-07); }
+  .chip-tag-danger { background:#FEE2E2; color:var(--danger); }
+  .chip-tag-mute   { background:var(--ui-01); color:var(--ink-7); }
+  .chip-verified   { background:var(--blue-02); color:var(--blue-07); border:1px solid var(--blue-04); }
 
   /* Card */
   .card { background:#fff; border-radius:16px; border:1px solid var(--ui-03); }
@@ -233,7 +233,7 @@
   .case-img-overlay { position:absolute; inset:0; padding:14px; display:flex; flex-direction:column; justify-content:space-between; z-index:2; color:#fff; }
   .verified-badge {
     display:inline-flex; align-items:center; gap:4px;
-    background: rgba(255,255,255,.92); color:#008A77;
+    background: rgba(255,255,255,.94); color: var(--blue-07);
     padding:4px 8px; border-radius:8px; font-size:11px; font-weight:700; backdrop-filter: blur(8px);
   }
   .roi-pill {
@@ -396,13 +396,13 @@
   /* Inbox row */
   .inbox-row { background:#fff; border:1px solid var(--ui-03); border-radius:14px; padding:14px; cursor:pointer; }
 
-  /* Tag (rounded) */
+  /* Tag (rounded) — 단순 3색 체계: blue / gray / red */
   .pill { display:inline-flex; align-items:center; gap:4px; padding:4px 10px; border-radius:20px; font-size:12px; font-weight:600; }
-  .pill-light { background:var(--ui-01); color:var(--ink-8); }
-  .pill-blue  { background:var(--blue-02); color:var(--blue-08); }
-  .pill-green { background:#E5F6EC; color:#108B51; }
-  .pill-red   { background:#FCE5E5; color:var(--danger); }
-  .pill-yellow{ background:#FFF4E0; color:#C97100; }
+  .pill-light { background:var(--ui-01); color:var(--ink-7); }
+  .pill-blue  { background:var(--blue-02); color:var(--blue-07); }
+  .pill-green { background:var(--blue-02); color:var(--blue-07); }
+  .pill-red   { background:#FEE2E2; color:var(--danger); }
+  .pill-yellow{ background:var(--ui-01); color:var(--ink-7); }
 
   /* Empty state */
   .empty {
@@ -1413,7 +1413,7 @@
         <span class="tab" onclick="toggleTab(this)">완료 <span style="color:var(--ink-6); margin-left:2px;">3</span></span>
       </div>
 
-      <div class="scroll" style="padding: 16px 20px 24px;">
+      <div class="scroll" style="padding: 16px 20px 140px;">
         <!-- Open request banner -->
         <div class="card-flat" style="padding:12px 14px; background: var(--blue-02); border-color: var(--blue-04); margin-bottom:14px; display:flex; gap:10px; align-items:center;">
           <svg width="20" height="20" style="color:var(--blue-08);"><use href="#ic-handshake"/></svg>
@@ -1513,7 +1513,7 @@
         <!-- 진행 중 광고 (요약 진입점) -->
         <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
           <div class="t-c1-s" style="color:var(--ink-10);">진행 중인 광고</div>
-          <button class="btn btn-ghost btn-s">전체 ›</button>
+          <button class="btn btn-ghost btn-s" onclick="comingSoon('진행 중 광고 전체')">전체 ›</button>
         </div>
         <div class="inbox-row press" onclick="showScreen('effect-report')" style="margin-bottom:10px;">
           <div style="display:flex; gap:12px; align-items:center;">
