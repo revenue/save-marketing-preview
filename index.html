@@ -478,6 +478,16 @@
 <!-- ===== SVG Icon Sprite ===== -->
 <svg width="0" height="0" style="position:absolute;" aria-hidden="true">
   <defs>
+    <!-- SAVE brand logo -->
+    <linearGradient id="save-logo-grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#5BBAFF"/>
+      <stop offset="100%" stop-color="#0061F2"/>
+    </linearGradient>
+    <symbol id="ic-save-logo" viewBox="0 0 64 64">
+      <rect width="64" height="64" rx="14" fill="url(#save-logo-grad)"/>
+      <text x="32" y="48" text-anchor="middle" font-family="Pretendard, -apple-system, sans-serif" font-weight="900" font-size="44" fill="#fff" font-style="italic">S</text>
+    </symbol>
+
     <!-- General UI -->
     <symbol id="ic-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9a2 2 0 0 1-2 2h-4v-7H9v7H5a2 2 0 0 1-2-2z"/></symbol>
     <symbol id="ic-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="20" y1="20" x2="16.5" y2="16.5"/></symbol>
@@ -559,7 +569,7 @@
     <!-- 0. SPLASH -->
     <div class="screen" data-scr="splash" style="background: linear-gradient(180deg, #fff 0%, var(--blue-02) 100%);">
       <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px;">
-        <div class="logo-mark">SM</div>
+        <svg width="88" height="88" style="border-radius:20px; box-shadow: 0 18px 32px -10px rgba(0,106,255,.5);"><use href="#ic-save-logo"/></svg>
         <div style="text-align:center;">
           <div class="t-d3" style="color:var(--ink-10);">SAVE Marketing</div>
           <div class="t-b3-m" style="color:var(--ink-7); margin-top:6px;">사장님과 검증된 마케팅 업체를 잇다</div>
@@ -738,7 +748,7 @@
       <!-- Top bar -->
       <div class="navbar navbar-main">
         <div style="flex:1; display:flex; align-items:center; gap:8px;">
-          <div style="width:28px; height:28px; border-radius:8px; background: linear-gradient(135deg, var(--blue-07), var(--blue-08)); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:900; font-size:13px;">SM</div>
+          <svg width="28" height="28" style="border-radius:7px;"><use href="#ic-save-logo"/></svg>
           <div class="t-b1" style="color:var(--ink-10);">오늘의 가게</div>
         </div>
         <div class="nb-right">
