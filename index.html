@@ -134,9 +134,9 @@
   .chip-tag-mute   { background:var(--ui-01); color:var(--ink-7); }
   .chip-verified   { background:var(--blue-02); color:var(--blue-07); border:1px solid var(--blue-04); }
 
-  /* Card */
-  .card { background:#fff; border-radius:16px; border:1px solid var(--ui-03); }
-  .card-flat { background:#fff; border-radius:12px; border:1px solid var(--ui-03); }
+  /* Card — 통일된 14px radius + 가벼운 border + 1단계 shadow */
+  .card { background:#fff; border-radius:14px; border:1px solid var(--ui-02); box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+  .card-flat { background:#fff; border-radius:14px; border:1px solid var(--ui-02); }
 
   /* TextField */
   .tf { display:flex; flex-direction:column; width:100%; }
@@ -199,28 +199,21 @@
   .bar>span { display:block; height:100%; background:var(--blue-07); border-radius:99px; }
   .bar-success>span { background:var(--success); }
 
-  /* Inside-Stores specific (real Unsplash photos — no text, marketing-grade) */
+  /* Inside-Stores specific (Unsplash photos with unified ink fallback) */
   .case-img {
     width:100%; aspect-ratio: 4/5; border-radius:14px; position:relative; overflow:hidden;
-    background: #1A2980 url('https://images.unsplash.com/photo-1583224964978-2257b960c3d3?w=600&q=80&fit=crop&auto=format') center/cover;
+    background: var(--ink-8) url('https://images.unsplash.com/photo-1583224964978-2257b960c3d3?w=600&q=80&fit=crop&auto=format') center/cover;
   }
-  /* alt-1: cafe / latte art */
-  .case-img.alt-1 { background: #C9F6E0 url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80&fit=crop&auto=format') center/cover; }
-  /* alt-2: nail / beauty */
-  .case-img.alt-2 { background: #FCE38A url('https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&q=80&fit=crop&auto=format') center/cover; }
-  /* alt-3: convenience / storefront */
-  .case-img.alt-3 { background: #1A2980 url('https://images.unsplash.com/photo-1601599963565-b7e8a35afa17?w=600&q=80&fit=crop&auto=format') center/cover; }
-  /* alt-4: pub / beer */
-  .case-img.alt-4 { background: #F76B1C url('https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=600&q=80&fit=crop&auto=format') center/cover; }
-  /* alt-5: shop facade */
-  .case-img.alt-5 { background: #654ea3 url('https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600&q=80&fit=crop&auto=format') center/cover; }
-  /* alt-6: study / education */
-  .case-img.alt-6 { background: #2E3192 url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=600&q=80&fit=crop&auto=format') center/cover; }
-  /* alt-7: korean street food / bunsik */
-  .case-img.alt-7 { background: #B24592 url('https://images.unsplash.com/photo-1635352608595-0a0d3dc2b2e0?w=600&q=80&fit=crop&auto=format') center/cover; }
+  .case-img.alt-1 { background: var(--ink-8) url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80&fit=crop&auto=format') center/cover; }
+  .case-img.alt-2 { background: var(--ink-8) url('https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&q=80&fit=crop&auto=format') center/cover; }
+  .case-img.alt-3 { background: var(--ink-8) url('https://images.unsplash.com/photo-1601599963565-b7e8a35afa17?w=600&q=80&fit=crop&auto=format') center/cover; }
+  .case-img.alt-4 { background: var(--ink-8) url('https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=600&q=80&fit=crop&auto=format') center/cover; }
+  .case-img.alt-5 { background: var(--ink-8) url('https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600&q=80&fit=crop&auto=format') center/cover; }
+  .case-img.alt-6 { background: var(--ink-8) url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=600&q=80&fit=crop&auto=format') center/cover; }
+  .case-img.alt-7 { background: var(--ink-8) url('https://images.unsplash.com/photo-1635352608595-0a0d3dc2b2e0?w=600&q=80&fit=crop&auto=format') center/cover; }
   .case-img.feature {
     aspect-ratio: 16/14;
-    background: #1A2980 url('https://images.unsplash.com/photo-1583032937-6128fafad5dd?w=800&q=85&fit=crop&auto=format') center/cover;
+    background: var(--ink-8) url('https://images.unsplash.com/photo-1583032937-6128fafad5dd?w=800&q=85&fit=crop&auto=format') center/cover;
   }
   .case-img::before {
     content:""; position:absolute; inset:0;
@@ -238,10 +231,10 @@
   }
   .roi-pill {
     display:inline-flex; align-items:center; gap:4px;
-    background: var(--ink-10); color:#fff;
+    background: rgba(255,255,255,.94); color: var(--ink-9);
     padding:4px 10px; border-radius:8px; font-size:12px; font-weight:700;
   }
-  .roi-pill.up { background: var(--blue-08); }
+  .roi-pill.up { background: rgba(255,255,255,.94); color: var(--blue-07); }
 
   /* Bookmark icon button */
   .bm-btn {
@@ -323,30 +316,30 @@
     font-size:38px; font-weight:900; box-shadow: 0 18px 32px -10px rgba(0,106,255,.5);
   }
 
-  /* Industry tile (replaces emoji) */
+  /* Industry tile — 단일 light blue 톤으로 통일 */
   .ind-tile {
     aspect-ratio: 1/1; border-radius:14px; display:flex; flex-direction:column;
-    align-items:center; justify-content:center; gap:8px; color:#fff; cursor:pointer;
+    align-items:center; justify-content:center; gap:8px; cursor:pointer;
     position:relative; overflow:hidden;
+    background: var(--blue-02) !important;
+    color: var(--blue-07);
+    border: 1px solid var(--ui-02);
   }
-  .ind-tile::after {
-    content:""; position:absolute; inset:0;
-    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.2), transparent 60%);
-  }
+  .ind-tile::after { display:none; }
   .ind-tile .ic-wrap { position:relative; z-index:2; }
-  .ind-tile .lbl { position:relative; z-index:2; font-size:14px; font-weight:600; }
-  .ind-tile .cnt { position:relative; z-index:2; font-size:11px; opacity:.85; font-weight:500; }
+  .ind-tile .lbl { position:relative; z-index:2; font-size:14px; font-weight:600; color: var(--ink-10); }
+  .ind-tile .cnt { position:relative; z-index:2; font-size:11px; font-weight:500; color: var(--ink-7); }
 
-  /* Story thumb with icon */
+  /* Story thumb — light blue 톤 통일 */
   .story-thumb-ic {
     width:64px; height:64px; border-radius:16px;
-    display:flex; align-items:center; justify-content:center; color:#fff;
+    display:flex; align-items:center; justify-content:center;
     position:relative; overflow:hidden;
+    background: var(--blue-02) !important;
+    color: var(--blue-07) !important;
+    border: 1px solid var(--ui-02);
   }
-  .story-thumb-ic::after {
-    content:""; position:absolute; inset:0;
-    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.25), transparent 60%);
-  }
+  .story-thumb-ic::after { display:none; }
   .story-thumb-ic > svg { position:relative; z-index:2; }
 
   /* Channel logo (square, brand-tinted) */
