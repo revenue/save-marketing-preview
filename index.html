@@ -199,29 +199,27 @@
   .bar>span { display:block; height:100%; background:var(--blue-07); border-radius:99px; }
   .bar-success>span { background:var(--success); }
 
-  /* Inside-Stores specific (Unsplash photos with unified ink fallback) */
+  /* Inside-Stores specific — 사진/그라디언트 제거, light gray placeholder */
   .case-img {
     width:100%; aspect-ratio: 4/5; border-radius:14px; position:relative; overflow:hidden;
-    background: var(--ink-8) url('https://images.unsplash.com/photo-1583224964978-2257b960c3d3?w=600&q=80&fit=crop&auto=format') center/cover;
+    background: var(--ui-02);
   }
-  .case-img.alt-1 { background: var(--ink-8) url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80&fit=crop&auto=format') center/cover; }
-  .case-img.alt-2 { background: var(--ink-8) url('https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&q=80&fit=crop&auto=format') center/cover; }
-  .case-img.alt-3 { background: var(--ink-8) url('https://images.unsplash.com/photo-1601599963565-b7e8a35afa17?w=600&q=80&fit=crop&auto=format') center/cover; }
-  .case-img.alt-4 { background: var(--ink-8) url('https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=600&q=80&fit=crop&auto=format') center/cover; }
-  .case-img.alt-5 { background: var(--ink-8) url('https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600&q=80&fit=crop&auto=format') center/cover; }
-  .case-img.alt-6 { background: var(--ink-8) url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=600&q=80&fit=crop&auto=format') center/cover; }
-  .case-img.alt-7 { background: var(--ink-8) url('https://images.unsplash.com/photo-1635352608595-0a0d3dc2b2e0?w=600&q=80&fit=crop&auto=format') center/cover; }
+  .case-img.alt-1, .case-img.alt-2, .case-img.alt-3, .case-img.alt-4,
+  .case-img.alt-5, .case-img.alt-6, .case-img.alt-7 { background: var(--ui-02); }
   .case-img.feature {
     aspect-ratio: 16/14;
-    background: var(--ink-8) url('https://images.unsplash.com/photo-1583032937-6128fafad5dd?w=800&q=85&fit=crop&auto=format') center/cover;
+    background: var(--ui-02);
   }
-  .case-img::before {
-    content:""; position:absolute; inset:0;
-    background: linear-gradient(180deg, rgba(0,0,0,.05) 0%, transparent 25%);
-  }
+  .case-img::before { display:none; }
   .case-img::after {
     content:""; position:absolute; left:0; right:0; bottom:0; height:55%;
-    background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,.65) 100%);
+    background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,.4) 100%);
+  }
+  /* placeholder 가운데 image 아이콘 */
+  .case-img > .case-img-overlay::before {
+    content:""; position:absolute; inset:0; z-index:1;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='1.5'><rect x='3' y='5' width='18' height='14' rx='2'/><circle cx='9' cy='11' r='2'/><path d='m3 17 5-5 4 4 3-3 6 6'/></svg>") center / 36px no-repeat;
+    opacity:.6;
   }
   .case-img-overlay { position:absolute; inset:0; padding:14px; display:flex; flex-direction:column; justify-content:space-between; z-index:2; color:#fff; }
   .verified-badge {
@@ -285,9 +283,10 @@
   .story-thumb { width:64px; height:64px; border-radius:16px; background: linear-gradient(135deg, var(--blue-03), var(--blue-05)); display:flex; align-items:center; justify-content:center; font-size:24px; }
   .story-lbl { font-size:11px; color:var(--ink-8); font-weight:600; text-align:center; line-height:1.2; }
 
-  /* Profile row */
-  .avatar { width:36px; height:36px; border-radius:50%; background: linear-gradient(135deg, var(--blue-04), var(--blue-07)); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; font-size:14px; flex-shrink:0; }
+  /* Profile row — 사진/그라디언트 제거, light gray 단색 */
+  .avatar { width:36px; height:36px; border-radius:50%; background: var(--ui-02) !important; display:flex; align-items:center; justify-content:center; color: var(--ink-7) !important; font-weight:700; font-size:14px; flex-shrink:0; }
   .avatar.lg { width:64px; height:64px; font-size:22px; }
+  .agency-avatar { background: var(--ui-02) !important; color: var(--ink-7) !important; }
 
   /* Disclosure cards */
   .dlc { border:2px solid var(--ui-03); border-radius:14px; padding:14px; cursor:pointer; transition:.15s; background:#fff; }
@@ -361,17 +360,14 @@
   .star-rating { display:inline-flex; align-items:center; gap:3px; color:#F5A623; font-size:13px; font-weight:700; }
   .star-rating svg { width:13px; height:13px; }
 
-  /* Agency hero (Unsplash — marketing studios / teams, no text) */
+  /* Agency hero — light gray placeholder */
   .agency-hero {
     height: 200px; position:relative; overflow:hidden;
-    background: #1A2980 url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=80&fit=crop&auto=format') center/cover;
+    background: var(--ui-02);
   }
-  .agency-hero.tone-2 { background: #654ea3 url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&q=80&fit=crop&auto=format') center/cover; }
-  .agency-hero.tone-3 { background: #F76B1C url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80&fit=crop&auto=format') center/cover; }
-  .agency-hero::after {
-    content:""; position:absolute; inset:0;
-    background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,.55) 100%);
-  }
+  .agency-hero.tone-2,
+  .agency-hero.tone-3 { background: var(--ui-02); }
+  .agency-hero::after { display:none; }
   .agency-avatar {
     width:72px; height:72px; border-radius:18px; background:#fff; display:flex;
     align-items:center; justify-content:center; color:var(--blue-08); font-weight:900; font-size:24px;
