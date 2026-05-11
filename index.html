@@ -70,23 +70,16 @@
   .t-c3 { font-size:12px; font-weight:500; line-height:1.35; }
   .t-c4 { font-size:11px; font-weight:400; line-height:1.35; }
 
-  /* Phone frame */
-  .stage { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 24px 12px 40px; }
+  /* App container — SAVE Radar/HR 동일 (프레임 없음, max-width 430) */
+  .stage { min-height: 100vh; display: flex; justify-content: center; background: #e5e7eb; }
   .device {
-    width: 430px; max-width: 100%; height: 932px; background:#fff;
-    border-radius: 48px; overflow: hidden; position: relative;
-    box-shadow: 0 30px 60px -20px rgba(0,0,0,.25), 0 0 0 10px #111827, 0 0 0 11px #1f2937;
+    width: 100%; max-width: 430px; height: 100vh; min-height: 100vh;
+    background: var(--ui-bg); position: relative; overflow-x: hidden;
+    border-left: 1px solid var(--ui-02);
+    border-right: 1px solid var(--ui-02);
   }
-  @media (max-width: 480px) {
-    .stage { padding: 0; }
-    .device { width: 100vw; height: 100vh; border-radius: 0; box-shadow: none; }
-  }
-  .statusbar {
-    height: 44px; display: flex; align-items: center; justify-content: space-between;
-    padding: 0 24px; font-size:14px; font-weight:600; color:var(--ink-10);
-    background:#fff;
-  }
-  .screen { position: absolute; inset: 44px 0 0 0; display: flex; flex-direction: column; background:var(--ui-bg); }
+  .statusbar { display: none; }
+  .screen { position: absolute; inset: 0; display: flex; flex-direction: column; background: var(--ui-bg); }
   .scroll { flex: 1; overflow-y: auto; overscroll-behavior: contain; padding-bottom: 100px; }
 
   /* NavigationBar — SAVE Radar/HR 동일 hdr 패턴 */
