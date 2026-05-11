@@ -89,11 +89,17 @@
   .screen { position: absolute; inset: 44px 0 0 0; display: flex; flex-direction: column; background:var(--ui-bg); }
   .scroll { flex: 1; overflow-y: auto; overscroll-behavior: contain; padding-bottom: 100px; }
 
-  /* SDS NavigationBar */
-  .navbar { height:52px; background:#fff; padding:8px 20px; display:flex; align-items:center; }
-  .navbar .nb-left, .navbar .nb-right { width:88px; display:flex; align-items:center; }
-  .navbar .nb-right { justify-content:flex-end; gap:10px; }
-  .navbar .nb-title { flex:1; min-width:0; text-align:center; color:var(--ink-9); font-size:17px; font-weight:600; line-height:1.4; }
+  /* NavigationBar — SAVE Radar/HR 동일 hdr 패턴 */
+  .navbar {
+    height:52px; background:#fff; padding:0 16px;
+    display:flex; align-items:center; justify-content:space-between;
+    border-bottom:1px solid var(--ui-01);
+  }
+  .navbar .nb-left, .navbar .nb-right { display:flex; align-items:center; gap:4px; }
+  .navbar .nb-left { min-width:36px; }
+  .navbar .nb-right { justify-content:flex-end; gap:4px; }
+  .navbar .nb-title { flex:1; min-width:0; text-align:center; color:var(--ink-10); font-size:17px; font-weight:700; line-height:1.4; letter-spacing:-.01em; }
+  .navbar.navbar-main { border-bottom-color: var(--ui-01); }
 
   /* Bottom nav — SAVE Radar/HR 동일 (60px 컴팩트) */
   .bnav {
@@ -133,8 +139,8 @@
   .chip-tag-mute   { background:var(--ui-01); color:var(--ink-7); }
   .chip-verified   { background:var(--blue-02); color:var(--blue-07); border:1px solid var(--blue-04); }
 
-  /* Card — 통일된 14px radius + 가벼운 border + 1단계 shadow */
-  .card { background:#fff; border-radius:14px; border:1px solid var(--ui-02); box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+  /* Card — SAVE Radar/HR 동일 (border 제거, shadow only) */
+  .card { background:#fff; border-radius:14px; box-shadow: 0 1px 3px rgba(0,0,0,.05); }
   .card-flat { background:#fff; border-radius:14px; border:1px solid var(--ui-02); }
 
   /* TextField */
